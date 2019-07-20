@@ -29,8 +29,21 @@ export const createUser = (email, password, firstName, lastName, learningTargets
   }
 }
 
-export const loginUser = () => {
+export const loginUser = (email, password) => {
   return dispatch => {
+
+    axios.get(`${api}/students/${email}`, {auth: {username: email , password: password }})
+    .then( resp => {
+       dispatch({
+          type: "LOGIN_USER",
+          payload: resp.data,
+       })
+       
+    })
+    .catch( err => {
+      getErrorMessage(err);
+    });
+
     /**
      * TODO: Login Action
      * 1. Call Login API
@@ -39,16 +52,18 @@ export const loginUser = () => {
      * 4. Dispatch action LOGIN_USER
      * 5. Listen on Socket start-chat to dispatch start-chat
      */
-    }
-  };
 
-export const updateUser = () => {
+    }
+}
+export const updateUser = (email) => {
   return dispatch => {
     /**
      * TODO: Update User action
      * 1. Call Update User API
      * 2. Dispatch action
      */
+    axios.put(`${api}/${email}`)
+
   }
 }
 
