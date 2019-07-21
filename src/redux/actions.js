@@ -31,19 +31,25 @@ export const createUser = (email, password, firstName, lastName, learningTargets
 
 export const loginUser = (email, password) => {
   return dispatch => {
+    axios.get(`${apiHost}/students/${email}`, {auth: {username: email, password:password}})
 
-    axios.get(`${api}/students/${email}`, {auth: {username: email , password: password }})
-    .then( resp => {
-       dispatch({
-          type: "LOGIN_USER",
-          payload: resp.data,
-       })
-       
+    .then(response =>{
+      sessionStorage.setItem('email',email);
+      sessionStorage.setItem('password',password);
+      dispatch({
+        type: 'LOGIN_USER',
+        payload: response.data
+      })
     })
-    .catch( err => {
-      getErrorMessage(err);
-    });
+    .catch(err => {
+      dispatch({
+        type: 'LOGIN_USER_ERROR',
+        payload: getErrorMessage(err)
+      })
+    })
+   
 
+  }
     /**
      * TODO: Login Action
      * 1. Call Login API
@@ -52,18 +58,16 @@ export const loginUser = (email, password) => {
      * 4. Dispatch action LOGIN_USER
      * 5. Listen on Socket start-chat to dispatch start-chat
      */
+    
+  };
 
-    }
-}
-export const updateUser = (email) => {
+export const updateUser = () => {
   return dispatch => {
     /**
      * TODO: Update User action
      * 1. Call Update User API
      * 2. Dispatch action
      */
-    axios.put(`${api}/${email}`)
-
   }
 }
 
