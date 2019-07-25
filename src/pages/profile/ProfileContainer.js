@@ -4,6 +4,9 @@ import Profile from './Profile';
 
 const mapStateToProps = state => {
   // TODO: pass logged in user data
+    return {
+      user: state.user.data
+    } 
 }
 
 const mapDispatchToProps = dispatch => {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Nav, Navbar} from 'react-bootstrap';
+import {Nav, Navbar, Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import tumoLogoArm from './tumo-logo-arm.png';
 import ProfileIcon from './ProfileIcon';
@@ -9,7 +9,7 @@ import SearchIcon from './SearchIcon';
 
 import './navigationbar.css';
 
-export default ({user, location}) => (
+export default ({user, location , logoutUser}) => (
   <div className="global-nav">
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
       <LinkContainer to="/">
@@ -41,6 +41,9 @@ export default ({user, location}) => (
         </Nav>
       </Navbar.Collapse>
       {
+        user?(
+          <h3> <Button variant="danger" onClick = {() => logoutUser(user)}> LogOut</Button> Hello  {user.firstName} </h3>
+        ) : null
         /**
          * TODO: When user logged in
          * 1. Text Hello [user first name]!
