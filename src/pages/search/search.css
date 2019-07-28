@@ -1,0 +1,9 @@
+.stat {
+    padding: 10px;
+    border-radius: 50px;
+    display: inline-block !important;
+    position: absolute;
+    left: 93%;
+    vertical-align:  middle;
+    width: 1px;
+}
